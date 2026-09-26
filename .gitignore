@@ -40,5 +40,8 @@ next-env.d.ts
 # custom - loop agentico (local only)
 loop/
 
+# custom - skills and agent specific resources
+.agents
+
 # custom - wireframes dev only
 wireframes/
