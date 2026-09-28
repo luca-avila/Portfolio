@@ -32,7 +32,7 @@ export default function Navbar(): React.JSX.Element {
               >
                 <span
                   aria-hidden="true"
-                  className="font-meta mr-1.5 text-xs text-neutral-600 transition-colors group-hover:text-neutral-400"
+                  className="font-meta text-accent mr-1.5 text-xs transition-colors"
                 >
                   {link.index}
                 </span>

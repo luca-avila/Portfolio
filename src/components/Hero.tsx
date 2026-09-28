@@ -2,6 +2,20 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import { profile } from "@/content/profile";
 
+function renderTagline(tagline: string, accent: string): React.ReactNode {
+  const index = tagline.indexOf(accent);
+  if (accent === "" || index === -1) {
+    return tagline;
+  }
+  return (
+    <>
+      {tagline.slice(0, index)}
+      <em className="font-editorial-em text-accent text-[1.05em]">{accent}</em>
+      {tagline.slice(index + accent.length)}
+    </>
+  );
+}
+
 export default function Hero(): React.JSX.Element {
   return (
     <section
@@ -22,7 +36,7 @@ export default function Hero(): React.JSX.Element {
             />
           </div>
           <div className="flex min-w-0 flex-col justify-center gap-5 p-6 sm:p-10 md:p-12">
-            <p className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
+            <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
               {profile.role}
             </p>
             <h1
@@ -32,7 +46,7 @@ export default function Hero(): React.JSX.Element {
               {profile.name}
             </h1>
             <p className="max-w-prose leading-relaxed text-neutral-400">
-              {profile.tagline}
+              {renderTagline(profile.tagline, profile.taglineAccent)}
             </p>
             <div className="mt-2 flex flex-col gap-3 sm:flex-row">
               <a

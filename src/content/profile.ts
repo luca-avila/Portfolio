@@ -7,6 +7,7 @@ export type Profile = {
   name: string;
   role: string;
   tagline: string;
+  taglineAccent: string;
   bio: string;
   skills: string[];
   email: string;
@@ -19,6 +20,7 @@ export const profile: Profile = {
   role: "Software engineer",
   tagline:
     "Fullstack developer enfocado en backend, sistemas e infraestructura.",
+  taglineAccent: "backend",
   bio: "Disfruto construir productos de punta a punta y entender cada capa del sistema, desde la aplicación hasta la infraestructura. Actualmente estoy profundizando en arquitectura, Linux, cloud y DevOps.",
   skills: ["Python", "FastAPI", "TypeScript", "PostgreSQL", "Docker", "Linux"],
   email: "avilaluca61@gmail.com",
