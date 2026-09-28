@@ -25,5 +25,6 @@ export const profile: Profile = {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/luca-avila-dev/",
     },
+    { label: "X", href: "https://x.com/Luca_dev1" },
   ],
 };

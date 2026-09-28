@@ -16,14 +16,14 @@ Fuente de datos para los chunks del portfolio. Los componentes leen desde `src/c
 - Email: avilaluca61@gmail.com
 - GitHub: https://github.com/luca-avila
 - LinkedIn: https://www.linkedin.com/in/luca-avila-dev/
-- X: pendiente (sin URL por ahora; el chunk 5 omite el icono hasta tenerla).
+- X: https://x.com/Luca_dev1
 
 ## Proyectos
 
 - Irruptivo → destacado / foco principal.
 - ClockLog → terminado, pero no destacado (el chunk 2 decide el grupo exacto).
 - Demos: https://irruptivo.shop/ · https://clocklog.net/
-- Repositorios: pendientes (no publicar botones hasta tener URLs).
+- Repositorios: https://github.com/luca-avila/irruptivo · https://github.com/luca-avila/ClockLog
 - Descripciones en español (2–3 líneas): las redacta el chunk 2 y se aprueban en revisión.
 
 ## Assets
