@@ -1,11 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { profile } from "@/content/profile";
 import "./globals.css";
 
+const pageTitle = `${profile.name} — ${profile.role}`;
+const pageDescription = `${profile.name} — ${profile.role}. ${profile.tagline}`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://example.com"),
-  title: "Portafolio personal",
-  description:
-    "Portafolio personal en español: proyectos, experiencia y vías de contacto.",
+  title: pageTitle,
+  description: pageDescription,
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    type: "website",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary",
+    title: pageTitle,
+    description: pageDescription,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

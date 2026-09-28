@@ -35,3 +35,37 @@ public/                  # assets estáticos
 
 La verificación de cierre de cada entrega ejecuta, en orden, `pnpm lint`,
 `pnpm exec tsc --noEmit`, `pnpm exec prettier --check .` y `pnpm build`.
+
+## Publicación (VPS + nginx)
+
+Sin Docker, sin Vercel, sin Node en runtime: el build es un directorio de
+archivos estáticos que nginx sirve directo.
+
+1. Generar el artefacto:
+
+   ```bash
+   pnpm build
+   ```
+
+   El contenido queda en `out/` (`out/index.html`, `out/_next/static/` y los
+   assets de `public/` copiados dentro).
+
+2. Copiar `out/` al VPS:
+
+   ```bash
+   rsync -avz --delete out/ user@vps:/var/www/portfolio/
+   ```
+
+3. Configurar nginx con `nginx.conf` (en la raíz del repo). Su `root` apunta a
+   la carpeta desplegada (`/var/www/portfolio`) y resuelve con
+   `try_files $uri $uri/ /index.html =404`, gzip y caché larga en
+   `/_next/static`.
+
+4. Validar y recargar:
+
+   ```bash
+   sudo nginx -t && sudo systemctl reload nginx
+   ```
+
+`public/cv.pdf` no se publica hasta existir el archivo real, por eso la sección
+Sobre mí no muestra botón de descarga.
