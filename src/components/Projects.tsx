@@ -1,9 +1,23 @@
+"use client";
+
+import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
+import ProjectModal from "@/components/ProjectModal";
 import { projects } from "@/content/projects";
+import type { Project } from "@/content/projects";
 
 export default function Projects(): React.JSX.Element {
+  const [selected, setSelected] = useState<Project | null>(null);
   const featured = projects.filter((project) => project.featured);
   const building = projects.filter((project) => !project.featured);
+
+  function handleOpen(project: Project): void {
+    setSelected(project);
+  }
+
+  function handleClose(): void {
+    setSelected(null);
+  }
 
   return (
     <section
@@ -24,7 +38,10 @@ export default function Projects(): React.JSX.Element {
         <ul className="mt-4 grid gap-6">
           {featured.map((project) => (
             <li key={project.slug}>
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                onOpen={() => handleOpen(project)}
+              />
             </li>
           ))}
         </ul>
@@ -39,11 +56,17 @@ export default function Projects(): React.JSX.Element {
         <ul className="mt-4 grid gap-6">
           {building.map((project) => (
             <li key={project.slug}>
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                onOpen={() => handleOpen(project)}
+              />
             </li>
           ))}
         </ul>
       </div>
+      {selected !== null && (
+        <ProjectModal project={selected} onClose={handleClose} />
+      )}
     </section>
   );
 }
