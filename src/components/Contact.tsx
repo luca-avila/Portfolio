@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
 import { profile, type ContactLink } from "@/content/profile";
 
 const iconClass = "h-5 w-5";
@@ -78,41 +80,49 @@ export default function Contact(): React.JSX.Element {
     <section
       id="contacto"
       aria-labelledby="contact-title"
-      className="mx-auto max-w-5xl scroll-mt-20 px-4 py-16"
+      className="mx-auto max-w-5xl scroll-mt-20 px-4 py-24 sm:py-32"
     >
-      <h2 id="contact-title" className="text-2xl font-semibold tracking-tight">
-        Contacto
-      </h2>
-      <p className="mt-4 max-w-prose text-neutral-300">
-        ¿Tenés un proyecto en mente o querés charlar? Escribime o encontrame en
-        estas redes.
-      </p>
-      <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 md:p-10">
-        <ul
-          aria-label="Vías de contacto"
-          className="flex flex-wrap items-center justify-center gap-3"
-        >
-          {profile.contactLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                aria-label={linkLabel(link.label)}
-                {...(link.label === "Email"
-                  ? {}
-                  : { target: "_blank", rel: "noopener noreferrer" })}
-                className={
-                  link.label === "Email"
-                    ? "flex min-h-[44px] items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 text-sm font-medium text-neutral-200 transition-colors hover:border-white/30 hover:bg-white/10"
-                    : "flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-neutral-200 transition-colors hover:border-white/30 hover:bg-white/10 sm:h-12 sm:w-12"
-                }
-              >
-                <ContactIcon label={link.label} />
-                {link.label === "Email" ? <span>{profile.email}</span> : null}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Reveal>
+        <SectionHeading
+          eyebrow="Contacto"
+          title="Hablemos"
+          id="contact-title"
+        />
+      </Reveal>
+      <Reveal index={1}>
+        <p className="mt-6 max-w-prose leading-relaxed text-neutral-400">
+          ¿Tenés un proyecto en mente o querés charlar? Escribime o encontrame
+          en estas redes.
+        </p>
+      </Reveal>
+      <Reveal index={2}>
+        <div className="card-lift mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10 md:p-12">
+          <ul
+            aria-label="Vías de contacto"
+            className="flex flex-wrap items-center justify-center gap-3"
+          >
+            {profile.contactLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  aria-label={linkLabel(link.label)}
+                  {...(link.label === "Email"
+                    ? {}
+                    : { target: "_blank", rel: "noopener noreferrer" })}
+                  className={
+                    link.label === "Email"
+                      ? "flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 text-sm font-medium text-neutral-200 transition-all hover:border-white/30 hover:bg-white/10 active:scale-[0.98]"
+                      : "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-200 transition-all hover:border-white/30 hover:bg-white/10 active:scale-[0.98] sm:h-12 sm:w-12"
+                  }
+                >
+                  <ContactIcon label={link.label} />
+                  {link.label === "Email" ? <span>{profile.email}</span> : null}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </section>
   );
 }

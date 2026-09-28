@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 const navLinks = [
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#proyectos", label: "Proyectos", index: "01" },
+  { href: "#sobre-mi", label: "Sobre mí", index: "02" },
+  { href: "#contacto", label: "Contacto", index: "03" },
 ] as const;
 
 export default function Navbar(): React.JSX.Element {
@@ -19,17 +19,23 @@ export default function Navbar(): React.JSX.Element {
       >
         <a
           href="#inicio"
-          className="min-w-0 truncate rounded-md text-sm font-semibold tracking-tight"
+          className="font-editorial min-w-0 truncate rounded-md text-lg tracking-tight"
         >
-          Inicio
+          {`Luca Avila`}
         </a>
-        <ul className="hidden items-center gap-4 text-sm text-neutral-300 md:flex">
+        <ul className="hidden items-center gap-8 text-sm text-neutral-400 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-md transition-colors hover:text-neutral-100"
+                className="group rounded-md transition-colors hover:text-neutral-100"
               >
+                <span
+                  aria-hidden="true"
+                  className="font-meta mr-1.5 text-xs text-neutral-600 transition-colors group-hover:text-neutral-400"
+                >
+                  {link.index}
+                </span>
                 {link.label}
               </a>
             </li>
@@ -41,7 +47,7 @@ export default function Navbar(): React.JSX.Element {
           aria-controls="menu-principal"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           onClick={() => setOpen((v) => !v)}
-          className="rounded-md border border-white/15 p-2 text-neutral-200 transition-colors hover:border-white/30 hover:text-neutral-100 md:hidden"
+          className="rounded-xl border border-white/15 p-2 text-neutral-200 transition-colors hover:border-white/30 hover:text-neutral-100 md:hidden"
         >
           {open ? (
             <svg

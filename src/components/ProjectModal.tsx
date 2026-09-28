@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import StackPills from "@/components/StackPills";
 import type { Project } from "@/content/projects";
 
 export default function ProjectModal({
@@ -71,7 +72,7 @@ export default function ProjectModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
       onMouseDown={handleOverlayMouseDown}
     >
       <div
@@ -80,15 +81,20 @@ export default function ProjectModal({
         aria-modal="true"
         aria-labelledby="project-modal-title"
         onKeyDown={handlePanelKeyDown}
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/10 bg-neutral-900 p-6"
+        className="modal-panel max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-neutral-950 p-6 sm:p-8"
       >
         <div className="flex items-start justify-between gap-4">
-          <h2
-            id="project-modal-title"
-            className="text-2xl font-semibold tracking-tight"
-          >
-            {project.title}
-          </h2>
+          <div className="min-w-0">
+            <p className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
+              Caso
+            </p>
+            <h2
+              id="project-modal-title"
+              className="font-editorial mt-2 text-3xl text-neutral-50"
+            >
+              {project.title}
+            </h2>
+          </div>
           <button
             ref={closeButtonRef}
             type="button"
@@ -109,7 +115,7 @@ export default function ProjectModal({
             </svg>
           </button>
         </div>
-        <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-xl">
+        <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}
@@ -118,24 +124,19 @@ export default function ProjectModal({
             className="object-cover"
           />
         </div>
-        <p className="mt-6 text-neutral-300">{project.description}</p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {project.stack.map((tech) => (
-            <li
-              key={tech}
-              className="rounded-full border border-white/10 px-3 py-1 text-sm text-neutral-300"
-            >
-              {tech}
-            </li>
-          ))}
-        </ul>
+        <p className="mt-6 leading-relaxed text-neutral-400">
+          {project.description}
+        </p>
+        <div className="mt-5 border-t border-white/10 pt-5">
+          <StackPills items={project.stack} />
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           {project.demoUrl !== "" && (
             <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-white/15 px-4 py-2 text-sm font-medium text-neutral-100 transition-colors hover:border-white/30 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+              className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
               Demo
             </a>
@@ -145,7 +146,7 @@ export default function ProjectModal({
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-white/15 px-4 py-2 text-sm font-medium text-neutral-100 transition-colors hover:border-white/30 hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+              className="inline-flex items-center justify-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
               Repositorio
             </a>
