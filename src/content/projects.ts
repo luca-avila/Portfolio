@@ -3,7 +3,38 @@ export type Project = {
   title: string;
   description: string;
   stack: string[];
+  imageSrc: string;
+  imageAlt: string;
+  demoUrl: string;
+  repoUrl: string;
+  featured: boolean;
 };
 
-// Los datos definitivos de proyectos se incorporan en el chunk 2.
-export const projects: Project[] = [];
+// Datos reales tomados de docs/content.md. Las URLs de demo y repo quedan
+// como datos para el detalle del chunk 3, sin renderizarse todavía en la UI.
+export const projects: Project[] = [
+  {
+    slug: "irruptivo",
+    title: "Irruptivo",
+    description:
+      "E-commerce full-stack para una marca de indumentaria y suplementos: catálogo, carrito, checkout con pagos de Mercado Pago, gestión de stock, seguimiento de pedidos y panel de administración.",
+    stack: ["Next.js", "PostgreSQL", "Docker", "Mercado Pago"],
+    imageSrc: "/irruptivo-screenshot.png",
+    imageAlt: "Captura de la tienda Irruptivo",
+    demoUrl: "https://irruptivo.shop/",
+    repoUrl: "https://github.com/luca-avila/irruptivo",
+    featured: true,
+  },
+  {
+    slug: "clocklog",
+    title: "ClockLog",
+    description:
+      "Temporizador pomodoro y planificador semanal full-stack: motor del lado del cliente con sincronización offline, donde cada bloque recibe una etiqueta y se convierte en un historial consultable. Autenticación JWT con email verificado.",
+    stack: ["Next.js", "FastAPI", "PostgreSQL", "Docker"],
+    imageSrc: "/clocklog-screenshot.png",
+    imageAlt: "Captura del temporizador ClockLog",
+    demoUrl: "https://clocklog.net/",
+    repoUrl: "https://github.com/luca-avila/ClockLog",
+    featured: false,
+  },
+];
