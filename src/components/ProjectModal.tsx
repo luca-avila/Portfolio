@@ -81,7 +81,7 @@ export default function ProjectModal({
         aria-modal="true"
         aria-labelledby="project-modal-title"
         onKeyDown={handlePanelKeyDown}
-        className="modal-panel max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-neutral-950 p-6 sm:p-8"
+        className="modal-panel max-h-[85vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-white/10 bg-neutral-950 p-5 sm:p-6"
       >
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
@@ -90,7 +90,7 @@ export default function ProjectModal({
             </p>
             <h2
               id="project-modal-title"
-              className="font-editorial mt-2 text-3xl text-neutral-50"
+              className="font-editorial mt-1 text-2xl text-neutral-50"
             >
               {project.title}
             </h2>
@@ -115,28 +115,28 @@ export default function ProjectModal({
             </svg>
           </button>
         </div>
-        <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10">
+        <div className="relative mt-4 aspect-[16/8] w-full overflow-hidden rounded-xl border border-white/10">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}
             fill
-            sizes="(max-width: 768px) 100vw, 672px"
+            sizes="(max-width: 768px) 100vw, 576px"
             className="object-cover"
           />
         </div>
-        <p className="mt-6 leading-relaxed text-neutral-400">
+        <p className="mt-4 leading-relaxed text-neutral-400">
           {project.description}
         </p>
-        <div className="mt-5 border-t border-white/10 pt-5">
+        <div className="mt-4 border-t border-white/10 pt-4">
           <StackPills items={project.stack} />
         </div>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-5 flex flex-wrap gap-3">
           {project.demoUrl !== "" && (
             <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+              className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
               Demo
             </a>
@@ -146,7 +146,7 @@ export default function ProjectModal({
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+              className="inline-flex items-center justify-center rounded-lg border border-white/15 px-4 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
               Repositorio
             </a>
