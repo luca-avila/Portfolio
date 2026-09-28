@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Newsreader, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
@@ -27,9 +27,9 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const editorial = Instrument_Serif({
+const editorial = Newsreader({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
   variable: "--font-editorial",
   display: "swap",
 });

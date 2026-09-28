@@ -5,8 +5,7 @@
   --color-background: #0a0a0a;
   --color-foreground: #f5f5f5;
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
-  --font-editorial:
-    "Newsreader", "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-editorial: "Newsreader", Georgia, "Times New Roman", serif;
   --font-meta:
     "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
