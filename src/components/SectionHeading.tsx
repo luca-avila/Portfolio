@@ -9,7 +9,7 @@ export default function SectionHeading({
 }): React.JSX.Element {
   return (
     <div>
-      <p className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
+      <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
         {eyebrow}
       </p>
       <h2

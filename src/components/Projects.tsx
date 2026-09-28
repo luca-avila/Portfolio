@@ -19,6 +19,9 @@ export default function Projects(): React.JSX.Element {
     setSelected(null);
   }
 
+  const featured = projects.filter((project) => project.featured);
+  const secondary = projects.filter((project) => !project.featured);
+
   return (
     <section
       id="proyectos"
@@ -36,19 +39,19 @@ export default function Projects(): React.JSX.Element {
         <Reveal>
           <h3
             id="destacados-title"
-            className="font-meta flex items-baseline gap-3 text-xs tracking-[0.18em] text-neutral-500 uppercase"
+            className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase"
           >
-            Destacados
+            Destacado
             <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
           </h3>
         </Reveal>
         <ul className="mt-6 grid gap-6">
-          {projects.map((project, i) => (
+          {featured.map((project) => (
             <li key={project.slug}>
-              <Reveal index={i}>
+              <Reveal>
                 <ProjectCard
                   project={project}
-                  primary={i === 0}
+                  primary
                   onOpen={() => handleOpen(project)}
                 />
               </Reveal>
@@ -56,6 +59,28 @@ export default function Projects(): React.JSX.Element {
           ))}
         </ul>
       </div>
+      {secondary.length > 0 && (
+        <div className="mt-16">
+          <Reveal>
+            <h3 className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase">
+              También construí
+              <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
+            </h3>
+          </Reveal>
+          <ul className="mt-6 grid gap-6">
+            {secondary.map((project, i) => (
+              <li key={project.slug}>
+                <Reveal index={i}>
+                  <ProjectCard
+                    project={project}
+                    onOpen={() => handleOpen(project)}
+                  />
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {selected !== null && (
         <ProjectModal project={selected} onClose={handleClose} />
       )}

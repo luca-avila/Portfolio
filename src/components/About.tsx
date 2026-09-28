@@ -28,7 +28,7 @@ export default function About(): React.JSX.Element {
               <h3 className="font-editorial text-2xl text-neutral-50 sm:text-3xl">
                 {profile.name}
               </h3>
-              <p className="font-meta mt-2 text-xs tracking-[0.18em] text-neutral-500 uppercase">
+              <p className="font-meta text-accent mt-2 text-xs tracking-[0.18em] uppercase">
                 {profile.role}
               </p>
             </div>

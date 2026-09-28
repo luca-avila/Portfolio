@@ -85,8 +85,8 @@ export default function ProjectModal({
       >
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
-              Caso
+            <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
+              Proyecto
             </p>
             <h2
               id="project-modal-title"
@@ -115,7 +115,7 @@ export default function ProjectModal({
             </svg>
           </button>
         </div>
-        <div className="relative mt-4 aspect-[16/8] w-full overflow-hidden rounded-xl border border-white/10">
+        <div className="relative mt-4 aspect-[500/255] w-full overflow-hidden rounded-xl border border-white/10">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}
