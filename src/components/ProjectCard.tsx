@@ -18,10 +18,18 @@ export default function ProjectCard({
         onClick={onOpen}
         aria-haspopup="dialog"
         aria-label={`Ver detalle de ${project.title}`}
-        className="card-lift group w-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] text-left focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+        className={`card-lift group w-full cursor-pointer overflow-hidden text-left focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none ${
+          primary
+            ? "rounded-3xl border border-white/15 bg-white/[0.05]"
+            : "rounded-2xl border border-white/10 bg-white/[0.02]"
+        }`}
       >
-        <div className="grid gap-6 p-6 sm:p-8 md:grid-cols-2 md:items-center md:gap-8">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10">
+        <div
+          className={`grid gap-6 md:grid-cols-2 md:items-center ${
+            primary ? "p-6 sm:p-10 md:gap-10" : "p-5 sm:p-6 md:gap-6"
+          }`}
+        >
+          <div className="relative aspect-[500/255] w-full overflow-hidden rounded-xl border border-white/10">
             <Image
               src={project.imageSrc}
               alt={project.imageAlt}
@@ -32,18 +40,26 @@ export default function ProjectCard({
             />
           </div>
           <div className="flex min-w-0 flex-col gap-4">
-            <h3 className="font-editorial text-2xl text-neutral-50 sm:text-3xl">
+            <h3
+              className={`font-editorial text-neutral-50 ${
+                primary ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"
+              }`}
+            >
               {project.title}
             </h3>
-            <StackPills items={project.stack} />
-            <p className="leading-relaxed text-neutral-400">
-              {project.description}
+            <StackPills items={project.stack} muted={!primary} />
+            <p
+              className={`leading-relaxed ${
+                primary ? "text-neutral-300" : "text-neutral-500"
+              }`}
+            >
+              {project.summary}
             </p>
             <span
               aria-hidden="true"
-              className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase transition-colors group-hover:text-neutral-200"
+              className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase transition-colors group-hover:text-accent"
             >
-              Ver caso →
+              Ver proyecto →
             </span>
           </div>
         </div>
