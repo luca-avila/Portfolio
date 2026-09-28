@@ -10,8 +10,6 @@ import type { Project } from "@/content/projects";
 
 export default function Projects(): React.JSX.Element {
   const [selected, setSelected] = useState<Project | null>(null);
-  const featured = projects.filter((project) => project.featured);
-  const building = projects.filter((project) => !project.featured);
 
   function handleOpen(project: Project): void {
     setSelected(project);
@@ -45,34 +43,12 @@ export default function Projects(): React.JSX.Element {
           </h3>
         </Reveal>
         <ul className="mt-6 grid gap-6">
-          {featured.map((project, i) => (
+          {projects.map((project, i) => (
             <li key={project.slug}>
               <Reveal index={i}>
                 <ProjectCard
                   project={project}
-                  onOpen={() => handleOpen(project)}
-                />
-              </Reveal>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-16">
-        <Reveal>
-          <h3
-            id="en-desarrollo-title"
-            className="font-meta flex items-baseline gap-3 text-xs tracking-[0.18em] text-neutral-500 uppercase"
-          >
-            En desarrollo
-            <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
-          </h3>
-        </Reveal>
-        <ul className="mt-6 grid gap-6">
-          {building.map((project, i) => (
-            <li key={project.slug}>
-              <Reveal index={i}>
-                <ProjectCard
-                  project={project}
+                  primary={i === 0}
                   onOpen={() => handleOpen(project)}
                 />
               </Reveal>
