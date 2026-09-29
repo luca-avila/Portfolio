@@ -63,8 +63,11 @@ body::before {
   font-family: var(--font-meta);
 }
 
-/* Acento cálido único: eyebrows, números e itálicas editoriales. */
-.text-accent {
+/* Acento cálido único: eyebrows, números e itálicas editoriales.
+   Registrado como utility para que funcione con variantes
+   (`group-hover:`, `hover:`, ...); como clase CSS plana Tailwind
+   no generaría esas variantes. */
+@utility text-accent {
   color: var(--color-accent);
 }
 

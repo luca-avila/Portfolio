@@ -28,7 +28,7 @@ export default function Hero(): React.JSX.Element {
           <div className="relative h-[clamp(15rem,36svh,22rem)] w-full overflow-hidden border-b border-white/10 md:h-[min(68svh,34rem)] md:rounded-3xl md:border">
             <Image
               src="/profile.jpeg"
-              alt="Retrato de Luca Avila"
+              alt={`Retrato de ${profile.name}`}
               fill
               priority
               sizes="(max-width: 767px) 100vw, 45vw"

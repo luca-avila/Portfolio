@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { profile } from "@/content/profile";
 
 const navLinks = [
   { href: "#proyectos", label: "Proyectos", index: "01" },
@@ -21,7 +22,7 @@ export default function Navbar(): React.JSX.Element {
           href="#inicio"
           className="font-editorial min-w-0 truncate rounded-md text-lg tracking-tight"
         >
-          {`Luca Avila`}
+          {profile.name}
         </a>
         <ul className="hidden items-center gap-8 text-sm text-neutral-400 md:flex">
           {navLinks.map((link) => (

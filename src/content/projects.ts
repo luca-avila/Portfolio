@@ -11,8 +11,7 @@ export type Project = {
   featured: boolean;
 };
 
-// Datos reales de proyectos. Las URLs de demo y repo quedan
-// como datos para el detalle del modal, sin renderizarse todavía en la UI.
+// Datos reales de proyectos.
 export const projects: Project[] = [
   {
     slug: "irruptivo",

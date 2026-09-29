@@ -26,7 +26,7 @@ export default function About(): React.JSX.Element {
         <a
           href="/cv.pdf"
           download
-          aria-label="Descargar CV de Luca Avila en PDF"
+          aria-label={`Descargar CV de ${profile.name} en PDF`}
           className="mt-8 inline-flex min-h-12 items-center justify-center rounded-2xl border border-white/15 px-6 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98]"
         >
           Descargar CV
