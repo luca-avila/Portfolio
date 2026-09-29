@@ -21,47 +21,47 @@ export default function Hero(): React.JSX.Element {
     <section
       id="inicio"
       aria-labelledby="hero-title"
-      className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl scroll-mt-20 flex-col justify-center px-4 py-6 sm:py-8 lg:py-10"
+      className="mx-auto max-w-6xl scroll-mt-20 pb-16 md:flex md:min-h-[calc(100svh-65px)] md:items-center md:px-4 md:py-10"
     >
-      <Reveal>
-        <div className="grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-10 lg:gap-14">
-          <div className="flex min-w-0 flex-col gap-4 sm:gap-5">
-            <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
-              {profile.role}
-            </p>
-            <h1
-              id="hero-title"
-              className="font-editorial text-4xl text-neutral-50 sm:text-5xl lg:text-6xl"
-            >
-              {renderAccent(profile.heroTitle, profile.heroTitleAccent)}
-            </h1>
-            <p className="max-w-prose leading-relaxed text-neutral-300 sm:text-lg">
-              {profile.heroLead}
-            </p>
-            <div className="mt-1 flex gap-3">
-              <a
-                href="#proyectos"
-                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-2xl bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] sm:flex-none sm:px-6"
-              >
-                Ver proyectos
-              </a>
-              <a
-                href="#contacto"
-                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-2xl border border-white/15 px-4 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] sm:flex-none sm:px-6"
-              >
-                Contactar
-              </a>
-            </div>
-          </div>
-          <div className="relative mx-auto h-[min(28svh,14rem)] w-full max-w-[17rem] overflow-hidden rounded-3xl border border-white/10 sm:h-[min(32svh,19rem)] sm:max-w-[22rem] md:h-[min(68svh,34rem)] md:max-w-none">
+      <Reveal className="w-full">
+        <div className="grid items-center md:grid-cols-[0.94fr_1.06fr] md:gap-12 lg:gap-20">
+          <div className="relative h-[clamp(15rem,36svh,22rem)] w-full overflow-hidden border-b border-white/10 md:h-[min(68svh,34rem)] md:rounded-3xl md:border">
             <Image
               src="/profile.jpeg"
               alt="Retrato de Luca Avila"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 45vw"
-              className="grayscale object-cover object-[center_20%] md:object-top"
+              sizes="(max-width: 767px) 100vw, 45vw"
+              className="grayscale object-cover object-[center_22%] brightness-[0.85] md:object-top md:brightness-100"
             />
+          </div>
+          <div className="flex min-w-0 flex-col px-5 pt-6 sm:px-8 sm:pt-9 md:px-0 md:pt-0">
+            <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
+              {profile.role}
+            </p>
+            <h1
+              id="hero-title"
+              className="font-editorial mt-3 text-[clamp(2.25rem,10.5vw,3.5rem)] text-neutral-50 sm:mt-4 sm:text-5xl lg:text-6xl"
+            >
+              {renderAccent(profile.heroTitle, profile.heroTitleAccent)}
+            </h1>
+            <p className="mt-4 max-w-[35ch] leading-relaxed text-neutral-300 sm:text-lg">
+              {profile.heroLead}
+            </p>
+            <div className="mt-6 flex gap-2.5 sm:mt-7 sm:gap-3">
+              <a
+                href="#proyectos"
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-2xl bg-neutral-100 px-3 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] sm:flex-none sm:px-6"
+              >
+                Ver proyectos
+              </a>
+              <a
+                href="#contacto"
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-2xl border border-white/15 px-3 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] sm:flex-none sm:px-6"
+              >
+                Contactar
+              </a>
+            </div>
           </div>
         </div>
       </Reveal>
