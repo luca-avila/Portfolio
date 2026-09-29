@@ -67,5 +67,4 @@ archivos estáticos que nginx sirve directo.
    sudo nginx -t && sudo systemctl reload nginx
    ```
 
-`public/cv.pdf` no se publica hasta existir el archivo real, por eso la sección
-Sobre mí no muestra botón de descarga.
+`public/cv.pdf` es el CV descargable desde la sección Sobre mí.

@@ -17,7 +17,7 @@ export type Profile = {
   contactLinks: ContactLink[];
 };
 
-// Datos reales tomados de docs/content.md.
+// Datos reales del perfil.
 export const profile: Profile = {
   name: "Luca Avila",
   role: "Desarrollador de software",

@@ -5,10 +5,6 @@ build
 next-env.d.ts
 pnpm-lock.yaml
 
-# Recursos locales del loop agéntico y wireframes (no versionados)
+# Recursos locales del loop agéntico (no versionados)
 loop
-wireframes
 .agents
-
-# Documentación de referencia, fuera del alcance del código (solo lectura)
-docs

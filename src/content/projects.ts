@@ -11,8 +11,8 @@ export type Project = {
   featured: boolean;
 };
 
-// Datos reales tomados de docs/content.md. Las URLs de demo y repo quedan
-// como datos para el detalle del chunk 3, sin renderizarse todavía en la UI.
+// Datos reales de proyectos. Las URLs de demo y repo quedan
+// como datos para el detalle del modal, sin renderizarse todavía en la UI.
 export const projects: Project[] = [
   {
     slug: "irruptivo",
