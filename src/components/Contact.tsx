@@ -80,7 +80,7 @@ export default function Contact(): React.JSX.Element {
     <section
       id="contacto"
       aria-labelledby="contact-title"
-      className="mx-auto max-w-5xl scroll-mt-20 px-4 py-24 sm:py-32"
+      className="mx-auto max-w-3xl scroll-mt-20 border-t border-white/10 px-4 py-24 sm:py-32"
     >
       <Reveal>
         <SectionHeading
@@ -90,38 +90,42 @@ export default function Contact(): React.JSX.Element {
         />
       </Reveal>
       <Reveal index={1}>
-        <p className="mt-6 max-w-prose leading-relaxed text-neutral-400">
+        <p className="mt-6 max-w-prose text-lg leading-relaxed text-neutral-300">
           ¿Tenés un proyecto en mente o querés charlar? Escribime o encontrame
           en estas redes.
         </p>
       </Reveal>
       <Reveal index={2}>
-        <div className="card-lift mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10 md:p-12">
-          <ul
-            aria-label="Vías de contacto"
-            className="flex flex-wrap items-center justify-center gap-3"
-          >
-            {profile.contactLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  aria-label={linkLabel(link.label)}
-                  {...(link.label === "Email"
-                    ? {}
-                    : { target: "_blank", rel: "noopener noreferrer" })}
-                  className={
-                    link.label === "Email"
-                      ? "flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 text-sm font-medium text-neutral-200 transition-all hover:border-white/30 hover:bg-white/10 active:scale-[0.98]"
-                      : "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-200 transition-all hover:border-white/30 hover:bg-white/10 active:scale-[0.98] sm:h-12 sm:w-12"
-                  }
-                >
+        <ul
+          aria-label="Vías de contacto"
+          className="mt-10 divide-y divide-white/10 border-y border-white/10"
+        >
+          {profile.contactLinks.map((link) => (
+            <li key={link.label}>
+              <a
+                href={link.href}
+                aria-label={linkLabel(link.label)}
+                {...(link.label === "Email"
+                  ? {}
+                  : { target: "_blank", rel: "noopener noreferrer" })}
+                className="group flex min-h-[44px] items-center justify-between gap-4 rounded-md py-4 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+              >
+                <span className="flex min-w-0 items-center gap-3 text-neutral-200 transition-colors group-hover:text-white">
                   <ContactIcon label={link.label} />
-                  {link.label === "Email" ? <span>{profile.email}</span> : null}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  <span className="truncate text-base">
+                    {link.label === "Email" ? profile.email : link.label}
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase transition-colors group-hover:text-accent"
+                >
+                  →
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </Reveal>
     </section>
   );

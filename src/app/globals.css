@@ -75,19 +75,25 @@ body::before {
   letter-spacing: -0.01em;
 }
 
-/* Entrada por scroll: solo transform + opacity, vía IntersectionObserver. */
+/* El contenido permanece visible antes de hidratar y sin JavaScript. */
 .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 600ms var(--ease-editorial),
-    transform 600ms var(--ease-editorial);
-  transition-delay: calc(var(--index, 0) * 80ms);
+  opacity: 1;
 }
 
 .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+  animation: reveal-in 600ms var(--ease-editorial) both;
+  animation-delay: calc(var(--index, 0) * 80ms);
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0.85;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Hover de tarjetas: desplazamiento de sombra ultra sutil. */
@@ -132,10 +138,8 @@ body::before {
   body::before {
     animation: none;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .reveal.is-visible {
+    animation: none;
   }
   .modal-panel {
     animation: none;

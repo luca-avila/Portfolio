@@ -15,7 +15,7 @@ export default function Navbar(): React.JSX.Element {
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur">
       <nav
         aria-label="Navegación principal"
-        className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4"
       >
         <a
           href="#inicio"
@@ -79,7 +79,7 @@ export default function Navbar(): React.JSX.Element {
       {open && (
         <ul
           id="menu-principal"
-          className="mx-auto max-w-5xl border-t border-white/10 px-4 pb-4 text-sm text-neutral-300 md:hidden"
+          className="mx-auto max-w-6xl border-t border-white/10 px-4 pb-4 text-sm text-neutral-300 md:hidden"
         >
           {navLinks.map((link) => (
             <li key={link.href}>

@@ -26,7 +26,7 @@ export default function Projects(): React.JSX.Element {
     <section
       id="proyectos"
       aria-labelledby="projects-title"
-      className="mx-auto max-w-5xl scroll-mt-20 px-4 py-24 sm:py-32"
+      className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:py-24"
     >
       <Reveal>
         <SectionHeading
@@ -35,7 +35,7 @@ export default function Projects(): React.JSX.Element {
           id="projects-title"
         />
       </Reveal>
-      <div className="mt-12">
+      <div className="mt-10">
         <Reveal>
           <h3
             id="destacados-title"
@@ -51,7 +51,7 @@ export default function Projects(): React.JSX.Element {
               <Reveal>
                 <ProjectCard
                   project={project}
-                  primary
+                  spotlight
                   onOpen={() => handleOpen(project)}
                 />
               </Reveal>
@@ -60,7 +60,7 @@ export default function Projects(): React.JSX.Element {
         </ul>
       </div>
       {secondary.length > 0 && (
-        <div className="mt-16">
+        <div className="mt-12">
           <Reveal>
             <h3 className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase">
               También construí

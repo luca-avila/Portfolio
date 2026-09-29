@@ -6,6 +6,9 @@ export type ContactLink = {
 export type Profile = {
   name: string;
   role: string;
+  heroTitle: string;
+  heroTitleAccent: string;
+  heroLead: string;
   tagline: string;
   taglineAccent: string;
   bio: string;
@@ -17,9 +20,13 @@ export type Profile = {
 // Datos reales tomados de docs/content.md.
 export const profile: Profile = {
   name: "Luca Avila",
-  role: "Software engineer",
+  role: "Desarrollador de software",
+  heroTitle: "Construyo productos web de punta a punta.",
+  heroTitleAccent: "punta a punta",
+  heroLead:
+    "Soy Luca Avila, desarrollador fullstack enfocado en backend, sistemas e infraestructura.",
   tagline:
-    "Fullstack developer enfocado en backend, sistemas e infraestructura.",
+    "Desarrollador fullstack enfocado en backend, sistemas e infraestructura.",
   taglineAccent: "backend",
   bio: "Disfruto construir productos de punta a punta y entender cada capa del sistema, desde la aplicación hasta la infraestructura. Actualmente estoy profundizando en arquitectura, Linux, cloud y DevOps.",
   skills: ["Python", "FastAPI", "TypeScript", "PostgreSQL", "Docker", "Linux"],

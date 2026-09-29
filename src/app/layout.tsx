@@ -9,6 +9,7 @@ const pageDescription = `${profile.name} — ${profile.role}. ${profile.tagline}
 export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
+  icons: { icon: "/favicon.svg" },
   openGraph: {
     title: pageTitle,
     description: pageDescription,
