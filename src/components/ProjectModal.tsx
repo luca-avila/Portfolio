@@ -138,7 +138,7 @@ export default function ProjectModal({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
-              Demo
+              Ver proyecto
             </a>
           )}
           {project.repoUrl !== "" && (
