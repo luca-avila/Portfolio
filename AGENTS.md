@@ -91,7 +91,7 @@ Reglas globales:
 - Contenido bilingüe: español (por defecto, en `/`) e inglés (en `/en/`). Todo texto visible o `aria-label` va en `src/content/` para ambos idiomas; nada hardcodeado en componentes.
 - i18n sin dependencias: cada idioma es un root layout estático; los componentes reciben `locale` y leen `dictionaries[locale]`, `profiles[locale]`, `projects[locale]`. Selector ES/EN en la navbar con links normales.
 - Tema oscuro (base `#0a0a0a`) y claro (base `#f7f6f3`), bordes sutiles `white/10`, radios grandes (`rounded-2xl/3xl`). Sin `next-themes`.
-- El tema vive en `<html data-theme="dark|light">`: lo fija un script inline en `<head>` (localStorage > `prefers-color-scheme` > oscuro) y lo cambia `ThemeToggle`. Sin JS queda oscuro.
+- El tema vive en `<html data-theme="dark|light">`: lo fija un script inline al inicio de `<body>` (localStorage > `prefers-color-scheme` > oscuro) y lo cambia `ThemeToggle`. Si el sistema cambia de modo con la página abierta, se sigue al sistema y se descarta la elección manual. Sin JS queda oscuro.
 - Los componentes se escriben pensando en oscuro (`text-neutral-*`, `white/*`); en claro `globals.css` invierte la escala `neutral` y `white`. No usar colores hex sueltos: usar los tokens `background`, `surface`, `surface-raised`, `accent`, `scrim` y `var(--color-shadow)`. Para ajustes solo en claro, variante `light:`.
 - Mobile-first responsive. Hero stackea en vertical en móvil.
 - Accesibilidad mínima: `alt` en imágenes, `aria-label` en iconos, contraste AA, foco visible, modal con `role="dialog" aria-modal="true"`.
