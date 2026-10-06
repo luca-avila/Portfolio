@@ -46,6 +46,10 @@ export default function ProjectCard({
           <p className="leading-relaxed text-neutral-300 sm:text-lg">
             {project.summary}
           </p>
+          <p className="font-meta text-xs leading-relaxed text-neutral-500">
+            <span className="sr-only">Deploy: </span>
+            {project.deployment}
+          </p>
           <span
             aria-hidden="true"
             className="font-meta text-xs tracking-[0.18em] text-neutral-400 uppercase transition-colors group-hover:text-accent"

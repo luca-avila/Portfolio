@@ -130,6 +130,14 @@ export default function ProjectModal({
         <div className="mt-4 border-t border-white/10 pt-4">
           <StackPills items={project.stack} />
         </div>
+        <div className="mt-4 border-t border-white/10 pt-4">
+          <h3 className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
+            Infraestructura
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+            {project.infrastructure}
+          </p>
+        </div>
         <div className="mt-5 flex flex-wrap gap-3">
           {project.demoUrl !== "" && (
             <a

@@ -7,6 +7,7 @@ const pageTitle = `${profile.name} — ${profile.role}`;
 const pageDescription = `${profile.name} — ${profile.role}. ${profile.tagline}`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://luca-avila.com"),
   title: pageTitle,
   description: pageDescription,
   icons: { icon: "/favicon.svg" },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     locale: "es_ES",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: pageTitle,
     description: pageDescription,
   },

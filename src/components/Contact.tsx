@@ -91,8 +91,9 @@ export default function Contact(): React.JSX.Element {
       </Reveal>
       <Reveal index={1}>
         <p className="mt-6 max-w-prose text-lg leading-relaxed text-neutral-300">
-          ¿Tenés un proyecto en mente o querés charlar? Escribime o encontrame
-          en estas redes.
+          Estoy abierto a oportunidades laborales en backend e infraestructura.
+          Si tenés una búsqueda o querés charlar, escribime o encontrame en
+          estas redes.
         </p>
       </Reveal>
       <Reveal index={2}>

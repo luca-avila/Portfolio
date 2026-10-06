@@ -19,15 +19,23 @@ export type Profile = {
 // Datos reales del perfil.
 export const profile: Profile = {
   name: "Luca Avila",
-  role: "Desarrollador de software",
-  heroTitle: "Construyo productos web de punta a punta.",
-  heroTitleAccent: "punta a punta",
+  role: "Desarrollador backend e infraestructura",
+  heroTitle:
+    "Construyo backends sólidos y la infraestructura que los sostiene.",
+  heroTitleAccent: "infraestructura",
   heroLead:
-    "Soy Luca Avila, desarrollador fullstack enfocado en backend, sistemas e infraestructura.",
-  tagline:
-    "Desarrollador fullstack enfocado en backend, sistemas e infraestructura.",
+    "Soy Luca Avila, desarrollador enfocado en APIs, Linux y despliegue en servidores propios.",
+  tagline: "APIs, Linux y despliegue en servidores propios.",
   bio: "Disfruto construir productos de punta a punta y entender cada capa del sistema, desde la aplicación hasta la infraestructura. Actualmente estoy profundizando en arquitectura, Linux, cloud y DevOps.",
-  skills: ["Python", "FastAPI", "TypeScript", "PostgreSQL", "Docker", "Linux"],
+  skills: [
+    "Python",
+    "FastAPI",
+    "TypeScript",
+    "PostgreSQL",
+    "Docker",
+    "Linux",
+    "Nginx",
+  ],
   email: "avilaluca61@gmail.com",
   contactLinks: [
     { label: "Email", href: "mailto:avilaluca61@gmail.com" },
