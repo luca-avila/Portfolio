@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import { profile } from "@/content/profile";
+import { profiles } from "@/content/profile";
+import { dictionaries } from "@/content/ui";
+import type { Locale } from "@/lib/i18n";
 
 function renderAccent(text: string, accent: string): React.ReactNode {
   const index = text.indexOf(accent);
@@ -16,10 +18,17 @@ function renderAccent(text: string, accent: string): React.ReactNode {
   );
 }
 
-export default function Hero(): React.JSX.Element {
+export default function Hero({
+  locale,
+}: {
+  locale: Locale;
+}): React.JSX.Element {
+  const profile = profiles[locale];
+  const { hero, sections } = dictionaries[locale];
+
   return (
     <section
-      id="inicio"
+      id={sections.home}
       aria-labelledby="hero-title"
       className="mx-auto max-w-6xl scroll-mt-20 pb-16 md:flex md:min-h-[calc(100svh-65px)] md:items-center md:px-4 md:py-10"
     >
@@ -28,7 +37,7 @@ export default function Hero(): React.JSX.Element {
           <div className="relative h-[clamp(15rem,36svh,22rem)] w-full overflow-hidden border-b border-white/10 md:h-[min(68svh,34rem)] md:rounded-3xl md:border">
             <Image
               src="/profile.jpeg"
-              alt={`Retrato de ${profile.name}`}
+              alt={hero.portraitAlt(profile.name)}
               fill
               priority
               sizes="(max-width: 767px) 100vw, 45vw"
@@ -50,16 +59,16 @@ export default function Hero(): React.JSX.Element {
             </p>
             <div className="mt-6 flex gap-2.5 sm:mt-7 sm:gap-3">
               <a
-                href="#proyectos"
+                href={`#${sections.projects}`}
                 className="inline-flex min-h-12 flex-1 items-center justify-center rounded-2xl bg-neutral-100 px-3 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] sm:flex-none sm:px-6"
               >
-                Ver proyectos
+                {hero.viewProjects}
               </a>
               <a
-                href="#contacto"
+                href={`#${sections.contact}`}
                 className="inline-flex min-h-12 flex-1 items-center justify-center rounded-2xl border border-white/15 px-3 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] sm:flex-none sm:px-6"
               >
-                Contactar
+                {hero.contact}
               </a>
             </div>
           </div>

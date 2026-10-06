@@ -2,11 +2,13 @@
 // no el color.
 export default function StackPills({
   items,
+  label,
 }: {
   items: string[];
+  label: string;
 }): React.JSX.Element {
   return (
-    <ul aria-label="Tecnologías" className="flex flex-wrap gap-2">
+    <ul aria-label={label} className="flex flex-wrap gap-2">
       {items.map((item) => (
         <li
           key={item}

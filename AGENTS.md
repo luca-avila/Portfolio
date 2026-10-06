@@ -2,7 +2,7 @@
 
 ## Proyecto
 
-Portfolio personal one-page, estático, en español, solo modo oscuro.
+Portfolio personal one-page, estático, bilingüe (español por defecto en `/`, inglés en `/en/`), solo modo oscuro.
 Fuente visual: `wireframes/` (local, no se commitea — ver `.gitignore`).
 Secciones: Hero, Projects, Project-detail (modal), About, Contact.
 
@@ -35,9 +35,14 @@ pnpm exec prettier --check .    # formato
 ## Estructura esperada
 
 ```text
-src/app/layout.tsx        # html lang="es", metadata, color-scheme dark
-src/app/page.tsx          # composición one-page
+src/app/(es)/layout.tsx   # root layout español: html lang="es", metadata
+src/app/(es)/page.tsx     # página en / (español)
+src/app/en/layout.tsx     # root layout inglés: html lang="en", metadata
+src/app/en/page.tsx       # página en /en/ (inglés)
 src/app/globals.css       # @import "tailwindcss";
+src/components/RootDocument.tsx  # <html>/<body> + fuentes, compartido por ambos layouts
+src/components/HomePage.tsx      # composición one-page, recibe `locale`
+src/components/LanguageSwitch.tsx
 src/components/Navbar.tsx
 src/components/Hero.tsx
 src/components/Projects.tsx
@@ -46,8 +51,11 @@ src/components/ProjectModal.tsx
 src/components/About.tsx
 src/components/Contact.tsx
 src/components/Footer.tsx
-src/content/projects.ts   # datos Irruptivo, ClockLog, etc.
-src/content/profile.ts    # bio, links, skills
+src/content/projects.ts   # datos Irruptivo, ClockLog, etc. (textos por idioma)
+src/content/profile.ts    # bio, links, skills (textos por idioma)
+src/content/ui.ts         # textos de UI y anclas por idioma
+src/lib/i18n.ts           # idiomas soportados y sus rutas
+src/lib/metadata.ts       # metadata por idioma (hreflang, og)
 public/                   # foto hero, avatares, cv.pdf, og-image
 nginx.conf
 ```
@@ -56,11 +64,15 @@ Si `next.config.ts` no existe, crearlo con:
 
 ```ts
 import type { NextConfig } from "next";
-const config: NextConfig = { output: "export", images: { unoptimized: true } };
+const config: NextConfig = {
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
+};
 export default config;
 ```
 
-Motivo: `output: "export"` genera `out/` servible por nginx sin Node en runtime.
+Motivo: `output: "export"` genera `out/` servible por nginx sin Node en runtime; `trailingSlash` exporta `/en/` como `out/en/index.html`.
 
 ## UI — contrato desde wireframes
 
@@ -74,7 +86,8 @@ Leer `wireframes/*.png` antes de tocar UI. Son la spec:
 
 Reglas globales:
 
-- Todo el contenido en español. Descripciones de proyectos también en español.
+- Contenido bilingüe: español (por defecto, en `/`) e inglés (en `/en/`). Todo texto visible o `aria-label` va en `src/content/` para ambos idiomas; nada hardcodeado en componentes.
+- i18n sin dependencias: cada idioma es un root layout estático; los componentes reciben `locale` y leen `dictionaries[locale]`, `profiles[locale]`, `projects[locale]`. Selector ES/EN en la navbar con links normales.
 - Solo oscuro. Base cercana a `#0a0a0a`, bordes sutiles `white/10`, radios grandes (`rounded-2xl/3xl`). No `light mode`, no `next-themes`.
 - Mobile-first responsive. Hero stackea en vertical en móvil.
 - Accesibilidad mínima: `alt` en imágenes, `aria-label` en iconos, contraste AA, foco visible, modal con `role="dialog" aria-modal="true"`.
@@ -87,7 +100,7 @@ Reglas globales:
 - Tailwind para todo el estilo. Nada de CSS Modules ni `style={{}}` salvo excepción justificada.
 - `next/image` para fotos/screenshots. Hero con `priority`.
 - Contenido hardcodeado en `src/content/`, nunca inline en JSX largo.
-- Español en UI, inglés solo en nombres técnicos (`Featured`, `Building in public` se traducen o se mantienen solo si el wireframe final lo exige — por defecto traducir).
+- Textos en español en la versión `es`, inglés solo en nombres técnicos (`Featured`, `Building in public` se traducen o se mantienen solo si el wireframe final lo exige — por defecto traducir).
 
 ## Calidad — verificación obligatoria por iteración
 
@@ -131,4 +144,4 @@ rsync -avz --delete out/ user@vps:/var/www/portfolio/
 
 - `pnpm build` falla con imágenes: verificar `images.unoptimized: true` en `next.config.ts` (obligatorio con `output: export`).
 - Página en blanco tras deploy nginx: revisar `try_files` y que el `root` apunte a `out/`, no a `.next/`.
-- Estilos Tailwind no aplican: verificar `@import "tailwindcss";` en `globals.css` y que `layout.tsx` lo importe.
+- Estilos Tailwind no aplican: verificar `@import "tailwindcss";` en `globals.css` y que `RootDocument.tsx` lo importe.

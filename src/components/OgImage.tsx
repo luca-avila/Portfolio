@@ -1,12 +1,17 @@
 import { ImageResponse } from "next/og";
-import { profile } from "@/content/profile";
+import { profiles } from "@/content/profile";
+import type { Locale } from "@/lib/i18n";
 
-export const dynamic = "force-static";
-export const alt = `${profile.name} — ${profile.role}`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const ogImageSize = { width: 1200, height: 630 };
 
-export default function OpengraphImage(): ImageResponse {
+export function ogImageAlt(locale: Locale): string {
+  const profile = profiles[locale];
+  return `${profile.name} — ${profile.role}`;
+}
+
+// og:image de cada idioma; la usan los `opengraph-image.tsx` de cada ruta.
+export function renderOgImage(locale: Locale): ImageResponse {
+  const profile = profiles[locale];
   return new ImageResponse(
     <div
       style={{
@@ -58,6 +63,6 @@ export default function OpengraphImage(): ImageResponse {
         luca-avila.com
       </div>
     </div>,
-    size,
+    ogImageSize,
   );
 }

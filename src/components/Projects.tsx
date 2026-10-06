@@ -5,10 +5,15 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectModal from "@/components/ProjectModal";
-import { projects } from "@/content/projects";
-import type { Project } from "@/content/projects";
+import { projects, type Project } from "@/content/projects";
+import { dictionaries } from "@/content/ui";
+import type { Locale } from "@/lib/i18n";
 
-export default function Projects(): React.JSX.Element {
+export default function Projects({
+  locale,
+}: {
+  locale: Locale;
+}): React.JSX.Element {
   const [selected, setSelected] = useState<Project | null>(null);
 
   function handleOpen(project: Project): void {
@@ -19,19 +24,20 @@ export default function Projects(): React.JSX.Element {
     setSelected(null);
   }
 
-  const featured = projects.filter((project) => project.featured);
-  const secondary = projects.filter((project) => !project.featured);
+  const t = dictionaries[locale];
+  const featured = projects[locale].filter((project) => project.featured);
+  const secondary = projects[locale].filter((project) => !project.featured);
 
   return (
     <section
-      id="proyectos"
+      id={t.sections.projects}
       aria-labelledby="projects-title"
       className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:py-24"
     >
       <Reveal>
         <SectionHeading
-          eyebrow="Trabajo seleccionado"
-          title="Proyectos"
+          eyebrow={t.projects.eyebrow}
+          title={t.projects.title}
           id="projects-title"
         />
       </Reveal>
@@ -41,7 +47,7 @@ export default function Projects(): React.JSX.Element {
             id="destacados-title"
             className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase"
           >
-            Destacado
+            {t.projects.featured}
             <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
           </h3>
         </Reveal>
@@ -51,6 +57,7 @@ export default function Projects(): React.JSX.Element {
               <Reveal>
                 <ProjectCard
                   project={project}
+                  locale={locale}
                   spotlight
                   onOpen={() => handleOpen(project)}
                 />
@@ -63,7 +70,7 @@ export default function Projects(): React.JSX.Element {
         <div className="mt-12">
           <Reveal>
             <h3 className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase">
-              También construí
+              {t.projects.secondary}
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
             </h3>
           </Reveal>
@@ -73,6 +80,7 @@ export default function Projects(): React.JSX.Element {
                 <Reveal index={i}>
                   <ProjectCard
                     project={project}
+                    locale={locale}
                     onOpen={() => handleOpen(project)}
                   />
                 </Reveal>
@@ -82,7 +90,11 @@ export default function Projects(): React.JSX.Element {
         </div>
       )}
       {selected !== null && (
-        <ProjectModal project={selected} onClose={handleClose} />
+        <ProjectModal
+          project={selected}
+          locale={locale}
+          onClose={handleClose}
+        />
       )}
     </section>
   );

@@ -4,14 +4,19 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import StackPills from "@/components/StackPills";
 import type { Project } from "@/content/projects";
+import { dictionaries } from "@/content/ui";
+import type { Locale } from "@/lib/i18n";
 
 export default function ProjectModal({
   project,
+  locale,
   onClose,
 }: {
   project: Project;
+  locale: Locale;
   onClose: () => void;
 }): React.JSX.Element {
+  const t = dictionaries[locale];
   const panelRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -86,7 +91,7 @@ export default function ProjectModal({
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <p className="font-meta text-accent text-xs tracking-[0.18em] uppercase">
-              Proyecto
+              {t.projects.modalEyebrow}
             </p>
             <h2
               id="project-modal-title"
@@ -99,7 +104,7 @@ export default function ProjectModal({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            aria-label="Cerrar detalle"
+            aria-label={t.projects.closeDetail}
             className="rounded-md border border-white/15 p-2 text-neutral-200 transition-colors hover:border-white/30 hover:text-neutral-100 focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
           >
             <svg
@@ -128,11 +133,11 @@ export default function ProjectModal({
           {project.description}
         </p>
         <div className="mt-4 border-t border-white/10 pt-4">
-          <StackPills items={project.stack} />
+          <StackPills items={project.stack} label={t.stackLabel} />
         </div>
         <div className="mt-4 border-t border-white/10 pt-4">
           <h3 className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase">
-            Infraestructura
+            {t.projects.infrastructure}
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-neutral-400">
             {project.infrastructure}
@@ -146,7 +151,7 @@ export default function ProjectModal({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-900 transition-all hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
-              Ver proyecto
+              {t.projects.demo}
             </a>
           )}
           {project.repoUrl !== "" && (
@@ -156,7 +161,7 @@ export default function ProjectModal({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg border border-white/15 px-4 py-2 text-sm font-semibold text-neutral-100 transition-all hover:border-white/30 hover:bg-white/5 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
             >
-              Repositorio
+              {t.projects.repo}
             </a>
           )}
         </div>

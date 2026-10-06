@@ -1,6 +1,8 @@
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { profile, type ContactLink } from "@/content/profile";
+import { profiles, type ContactLink, type Profile } from "@/content/profile";
+import { dictionaries, type Dictionary } from "@/content/ui";
+import type { Locale } from "@/lib/i18n";
 
 const iconClass = "h-5 w-5";
 
@@ -62,50 +64,52 @@ function ContactIcon({
   }
 }
 
-function linkLabel(label: ContactLink["label"]): string {
-  switch (label) {
-    case "Email":
-      return `Enviar correo a ${profile.email}`;
-    case "GitHub":
-      return `GitHub de ${profile.name}`;
-    case "LinkedIn":
-      return `LinkedIn de ${profile.name}`;
-    case "X":
-      return `X de ${profile.name}`;
-  }
+function linkLabel(
+  label: ContactLink["label"],
+  profile: Profile,
+  contact: Dictionary["contact"],
+): string {
+  return label === "Email"
+    ? contact.emailLabel(profile.email)
+    : contact.profileLabel(label, profile.name);
 }
 
-export default function Contact(): React.JSX.Element {
+export default function Contact({
+  locale,
+}: {
+  locale: Locale;
+}): React.JSX.Element {
+  const profile = profiles[locale];
+  const { contact, sections } = dictionaries[locale];
+
   return (
     <section
-      id="contacto"
+      id={sections.contact}
       aria-labelledby="contact-title"
       className="mx-auto max-w-3xl scroll-mt-20 border-t border-white/10 px-4 py-24 sm:py-32"
     >
       <Reveal>
         <SectionHeading
-          eyebrow="Contacto"
-          title="Hablemos"
+          eyebrow={contact.eyebrow}
+          title={contact.title}
           id="contact-title"
         />
       </Reveal>
       <Reveal index={1}>
         <p className="mt-6 max-w-prose text-lg leading-relaxed text-neutral-300">
-          Estoy abierto a oportunidades laborales en backend e infraestructura.
-          Si tenés una búsqueda o querés charlar, escribime o encontrame en
-          estas redes.
+          {contact.lead}
         </p>
       </Reveal>
       <Reveal index={2}>
         <ul
-          aria-label="Vías de contacto"
+          aria-label={contact.listLabel}
           className="mt-10 divide-y divide-white/10 border-y border-white/10"
         >
           {profile.contactLinks.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
-                aria-label={linkLabel(link.label)}
+                aria-label={linkLabel(link.label, profile, contact)}
                 {...(link.label === "Email"
                   ? {}
                   : { target: "_blank", rel: "noopener noreferrer" })}

@@ -1,81 +1,92 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/content/profile";
+import LanguageSwitch from "@/components/LanguageSwitch";
+import { profiles } from "@/content/profile";
+import { dictionaries } from "@/content/ui";
+import type { Locale } from "@/lib/i18n";
 
-const navLinks = [
-  { href: "#proyectos", label: "Proyectos", index: "01" },
-  { href: "#sobre-mi", label: "Sobre mí", index: "02" },
-  { href: "#contacto", label: "Contacto", index: "03" },
-] as const;
-
-export default function Navbar(): React.JSX.Element {
+export default function Navbar({
+  locale,
+}: {
+  locale: Locale;
+}): React.JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
+  const { nav, sections } = dictionaries[locale];
+
+  const navLinks = [
+    { href: `#${sections.projects}`, label: nav.projects, index: "01" },
+    { href: `#${sections.about}`, label: nav.about, index: "02" },
+    { href: `#${sections.contact}`, label: nav.contact, index: "03" },
+  ];
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur">
       <nav
-        aria-label="Navegación principal"
+        aria-label={nav.label}
         className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4"
       >
         <a
-          href="#inicio"
+          href={`#${sections.home}`}
           className="font-editorial min-w-0 truncate rounded-md text-lg tracking-tight"
         >
-          {profile.name}
+          {profiles[locale].name}
         </a>
-        <ul className="hidden items-center gap-8 text-sm text-neutral-400 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="group rounded-md transition-colors hover:text-neutral-100"
-              >
-                <span
-                  aria-hidden="true"
-                  className="font-meta text-accent mr-1.5 text-xs transition-colors"
+        <div className="flex items-center gap-3 md:gap-8">
+          <ul className="hidden items-center gap-8 text-sm text-neutral-400 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="group rounded-md transition-colors hover:text-neutral-100"
                 >
-                  {link.index}
-                </span>
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls="menu-principal"
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          onClick={() => setOpen((v) => !v)}
-          className="rounded-xl border border-white/15 p-2 text-neutral-200 transition-colors hover:border-white/30 hover:text-neutral-100 md:hidden"
-        >
-          {open ? (
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              className="h-5 w-5"
-            >
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          ) : (
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              className="h-5 w-5"
-            >
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          )}
-        </button>
+                  <span
+                    aria-hidden="true"
+                    className="font-meta text-accent mr-1.5 text-xs transition-colors"
+                  >
+                    {link.index}
+                  </span>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <LanguageSwitch locale={locale} />
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="menu-principal"
+            aria-label={open ? nav.closeMenu : nav.openMenu}
+            onClick={() => setOpen((v) => !v)}
+            className="rounded-xl border border-white/15 p-2 text-neutral-200 transition-colors hover:border-white/30 hover:text-neutral-100 md:hidden"
+          >
+            {open ? (
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                className="h-5 w-5"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                className="h-5 w-5"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </nav>
       {open && (
         <ul

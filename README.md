@@ -1,6 +1,7 @@
 # Portafolio
 
-Portafolio personal one-page, estático, en español y solo modo oscuro. Stack:
+Portafolio personal one-page, estático, bilingüe (español en `/`, inglés en
+`/en/`) y solo modo oscuro. Stack:
 Next.js 15 (App Router), React 19, TypeScript estricto, Tailwind CSS v4 y pnpm.
 
 El build genera HTML estático en `out/`, pensado para servirse directo con
@@ -25,11 +26,12 @@ pnpm exec prettier --check .        # verificación de formato
 ## Estructura
 
 ```text
-src/app/layout.tsx       # html lang="es", metadatos, tema oscuro
-src/app/page.tsx         # composición one-page
+src/app/(es)/            # root layout + página en español (/)
+src/app/en/              # root layout + página en inglés (/en/)
 src/app/globals.css      # @import "tailwindcss";
 src/components/          # secciones y componentes
-src/content/             # datos tipados (proyectos, perfil)
+src/content/             # datos tipados por idioma (proyectos, perfil, textos UI)
+src/lib/                 # idiomas y metadatos
 public/                  # assets estáticos
 ```
 
