@@ -22,6 +22,8 @@ export type Dictionary = {
     portraitAlt: (name: string) => string;
     viewProjects: string;
     contact: string;
+    highlightsLabel: string;
+    socialLabel: string;
   };
   projects: {
     eyebrow: string;
@@ -31,6 +33,7 @@ export type Dictionary = {
     openDetail: (title: string) => string;
     deployLabel: string;
     viewProject: string;
+    liveLabel: string;
     modalEyebrow: string;
     closeDetail: string;
     infrastructure: string;
@@ -42,17 +45,33 @@ export type Dictionary = {
     title: string;
     downloadCv: string;
     downloadCvLabel: (name: string) => string;
+    nowLabel: string;
   };
   contact: {
     eyebrow: string;
     title: string;
     lead: string;
     listLabel: string;
+    emailCta: string;
     emailLabel: (email: string) => string;
+    copyEmail: string;
+    emailCopied: string;
     profileLabel: (network: string, name: string) => string;
   };
+  footer: {
+    builtWith: string;
+    backToTop: string;
+  };
   stackLabel: string;
+  newTab: string;
 };
+
+// Numeración de secciones, compartida por la navbar y los encabezados.
+export const sectionIndex = {
+  projects: "01",
+  about: "02",
+  contact: "03",
+} as const;
 
 export const dictionaries: Record<Locale, Dictionary> = {
   es: {
@@ -76,6 +95,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       portraitAlt: (name) => `Retrato de ${name}`,
       viewProjects: "Ver proyectos",
       contact: "Contactar",
+      highlightsLabel: "Resumen",
+      socialLabel: "Redes",
     },
     projects: {
       eyebrow: "Trabajo seleccionado",
@@ -83,8 +104,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       featured: "Destacado",
       secondary: "También construí",
       openDetail: (title) => `Ver detalle de ${title}`,
-      deployLabel: "Deploy: ",
+      deployLabel: "Deploy",
       viewProject: "Ver proyecto",
+      liveLabel: "En producción",
       modalEyebrow: "Proyecto",
       closeDetail: "Cerrar detalle",
       infrastructure: "Infraestructura",
@@ -96,16 +118,25 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title: "Sobre mí",
       downloadCv: "Descargar CV",
       downloadCvLabel: (name) => `Descargar CV de ${name} en PDF`,
+      nowLabel: "Ahora",
     },
     contact: {
       eyebrow: "Contacto",
       title: "Hablemos",
       lead: "Estoy abierto a oportunidades laborales en backend e infraestructura. Si tenés una búsqueda o querés charlar, escribime o encontrame en estas redes.",
-      listLabel: "Vías de contacto",
+      listLabel: "Redes",
+      emailCta: "Escribime",
       emailLabel: (email) => `Enviar correo a ${email}`,
+      copyEmail: "Copiar email",
+      emailCopied: "Email copiado",
       profileLabel: (network, name) => `${network} de ${name}`,
     },
+    footer: {
+      builtWith: "Sitio estático servido con nginx desde un VPS propio.",
+      backToTop: "Volver arriba",
+    },
     stackLabel: "Tecnologías",
+    newTab: "(se abre en una pestaña nueva)",
   },
   en: {
     sections: {
@@ -128,6 +159,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       portraitAlt: (name) => `Portrait of ${name}`,
       viewProjects: "View projects",
       contact: "Get in touch",
+      highlightsLabel: "Summary",
+      socialLabel: "Social",
     },
     projects: {
       eyebrow: "Selected work",
@@ -135,8 +168,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
       featured: "Featured",
       secondary: "Also built",
       openDetail: (title) => `View details for ${title}`,
-      deployLabel: "Deployment: ",
+      deployLabel: "Deploy",
       viewProject: "View project",
+      liveLabel: "Live",
       modalEyebrow: "Project",
       closeDetail: "Close details",
       infrastructure: "Infrastructure",
@@ -149,15 +183,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
       // El CV publicado (`/cv.pdf`) está en español.
       downloadCv: "Download CV (Spanish)",
       downloadCvLabel: (name) => `Download ${name}'s CV as a PDF, in Spanish`,
+      nowLabel: "Now",
     },
     contact: {
       eyebrow: "Contact",
       title: "Let's talk",
       lead: "I'm open to job opportunities in backend and infrastructure. If you're hiring or just want to chat, send me an email or find me on these networks.",
-      listLabel: "Contact options",
+      listLabel: "Social",
+      emailCta: "Email me",
       emailLabel: (email) => `Send an email to ${email}`,
+      copyEmail: "Copy email",
+      emailCopied: "Email copied",
       profileLabel: (network, name) => `${name} on ${network}`,
     },
+    footer: {
+      builtWith: "Static site served by nginx from a self-managed VPS.",
+      backToTop: "Back to top",
+    },
     stackLabel: "Technologies",
+    newTab: "(opens in a new tab)",
   },
 };

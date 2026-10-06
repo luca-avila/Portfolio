@@ -13,14 +13,14 @@ export default function LanguageSwitch({
   return (
     <ul
       aria-label={nav.languageLabel}
-      className="font-meta flex items-center rounded-xl border border-white/15 p-0.5 text-xs tracking-[0.08em] uppercase"
+      className="font-meta flex items-center rounded-full border border-white/10 p-1 text-[0.6875rem] tracking-[0.08em] uppercase"
     >
       {locales.map((l) => (
         <li key={l}>
           {l === locale ? (
             <span
               aria-current="true"
-              className="block rounded-[0.6rem] bg-white/10 px-2.5 py-1.5 text-neutral-100"
+              className="block rounded-full bg-white/10 px-2.5 py-1 text-neutral-50"
             >
               {l}
             </span>
@@ -29,7 +29,7 @@ export default function LanguageSwitch({
               href={localePaths[l]}
               hrefLang={l}
               aria-label={nav.switchTo}
-              className="block rounded-[0.6rem] px-2.5 py-1.5 text-neutral-400 transition-colors hover:text-neutral-100"
+              className="block rounded-full px-2.5 py-1 text-neutral-400 transition-colors hover:text-neutral-100"
             >
               {l}
             </a>

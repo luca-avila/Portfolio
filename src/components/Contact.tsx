@@ -1,78 +1,10 @@
+import CopyEmailButton from "@/components/CopyEmailButton";
+import { ArrowUpRightIcon, SocialIcon } from "@/components/Icons";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { profiles, type ContactLink, type Profile } from "@/content/profile";
-import { dictionaries, type Dictionary } from "@/content/ui";
+import { profiles } from "@/content/profile";
+import { dictionaries, sectionIndex } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
-
-const iconClass = "h-5 w-5";
-
-function ContactIcon({
-  label,
-}: {
-  label: ContactLink["label"];
-}): React.JSX.Element {
-  switch (label) {
-    case "Email":
-      return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={iconClass}
-        >
-          <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="m3 7 9 6 9-6" />
-        </svg>
-      );
-    case "GitHub":
-      return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className={iconClass}
-        >
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-        </svg>
-      );
-    case "LinkedIn":
-      return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className={iconClass}
-        >
-          <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
-        </svg>
-      );
-    case "X":
-      return (
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className={iconClass}
-        >
-          <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z" />
-        </svg>
-      );
-  }
-}
-
-function linkLabel(
-  label: ContactLink["label"],
-  profile: Profile,
-  contact: Dictionary["contact"],
-): string {
-  return label === "Email"
-    ? contact.emailLabel(profile.email)
-    : contact.profileLabel(label, profile.name);
-}
 
 export default function Contact({
   locale,
@@ -80,57 +12,77 @@ export default function Contact({
   locale: Locale;
 }): React.JSX.Element {
   const profile = profiles[locale];
-  const { contact, sections } = dictionaries[locale];
+  const { contact, sections, newTab } = dictionaries[locale];
+  const socialLinks = profile.contactLinks.filter(
+    (link) => link.label !== "Email",
+  );
 
   return (
     <section
       id={sections.contact}
       aria-labelledby="contact-title"
-      className="mx-auto max-w-3xl scroll-mt-20 border-t border-white/10 px-4 py-24 sm:py-32"
+      className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8 sm:py-24 md:px-6"
     >
       <Reveal>
-        <SectionHeading
-          eyebrow={contact.eyebrow}
-          title={contact.title}
-          id="contact-title"
-        />
-      </Reveal>
-      <Reveal index={1}>
-        <p className="mt-6 max-w-prose text-lg leading-relaxed text-neutral-300">
-          {contact.lead}
-        </p>
-      </Reveal>
-      <Reveal index={2}>
-        <ul
-          aria-label={contact.listLabel}
-          className="mt-10 divide-y divide-white/10 border-y border-white/10"
-        >
-          {profile.contactLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                aria-label={linkLabel(link.label, profile, contact)}
-                {...(link.label === "Email"
-                  ? {}
-                  : { target: "_blank", rel: "noopener noreferrer" })}
-                className="group flex min-h-[44px] items-center justify-between gap-4 rounded-md py-4 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
-              >
-                <span className="flex min-w-0 items-center gap-3 text-neutral-200 transition-colors group-hover:text-white">
-                  <ContactIcon label={link.label} />
-                  <span className="truncate text-base">
-                    {link.label === "Email" ? profile.email : link.label}
-                  </span>
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="font-meta text-xs tracking-[0.18em] text-neutral-500 uppercase transition-colors group-hover:text-accent"
+        <div className="rounded-3xl border border-white/10 bg-white/[0.025] p-6 sm:p-10 lg:p-14">
+          <div className="grid gap-12 lg:grid-cols-[7fr_5fr] lg:items-end lg:gap-16">
+            <div>
+              <SectionHeading
+                index={sectionIndex.contact}
+                eyebrow={contact.eyebrow}
+                title={contact.title}
+                id="contact-title"
+              />
+              <p className="mt-6 max-w-prose text-lg leading-relaxed text-pretty text-neutral-400">
+                {contact.lead}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href={`mailto:${profile.email}`}
+                  aria-label={contact.emailLabel(profile.email)}
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-neutral-100 px-6 py-2 text-sm font-semibold text-neutral-950 transition-all hover:bg-white active:scale-[0.98]"
                 >
-                  →
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+                  <SocialIcon label="Email" className="h-4 w-4" />
+                  {contact.emailCta}
+                  <span className="hidden font-normal text-neutral-600 min-[400px]:inline">
+                    {profile.email}
+                  </span>
+                </a>
+                <CopyEmailButton
+                  email={profile.email}
+                  label={contact.copyEmail}
+                  copiedLabel={contact.emailCopied}
+                />
+              </div>
+            </div>
+            <ul aria-label={contact.listLabel} className="grid gap-2">
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${contact.profileLabel(link.label, profile.name)} ${newTab}`}
+                    className="group flex min-h-14 items-center gap-4 rounded-2xl border border-white/10 bg-[#0a0a0a]/60 px-4 py-3 transition-colors hover:border-white/25 hover:bg-white/[0.04]"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.05] text-neutral-200">
+                      <SocialIcon label={link.label} className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium text-neutral-100">
+                        {link.label}
+                      </span>
+                      <span className="font-meta block truncate text-xs text-neutral-400">
+                        {link.handle}
+                      </span>
+                    </span>
+                    <ArrowUpRightIcon className="group-hover:text-accent h-4 w-4 text-neutral-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </Reveal>
     </section>
   );
