@@ -1,14 +1,24 @@
 @import "tailwindcss";
 
+/* Las variables `--font-*-family` las define next/font en <html>
+   (ver `RootDocument.tsx`); acá solo se encadenan los fallbacks. */
+@theme inline {
+  --font-sans:
+    var(--font-sans-family), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
 :root {
   color-scheme: dark;
   --color-background: #0a0a0a;
   --color-foreground: #f5f5f5;
   --color-accent: #e7dcc3;
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
-  --font-editorial: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-editorial:
+    var(--font-editorial-family), Georgia, "Times New Roman", serif;
   --font-meta:
-    "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    var(--font-meta-family), "SF Mono", ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 }
 
 html {
@@ -54,8 +64,9 @@ body::before {
 /* Contraste tipográfico editorial: serif para titulares. */
 .font-editorial {
   font-family: var(--font-editorial);
+  font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 /* Metadatos y etiquetas en monoespaciada. */
@@ -71,11 +82,50 @@ body::before {
   color: var(--color-accent);
 }
 
+@utility bg-accent {
+  background-color: var(--color-accent);
+}
+
 .font-editorial-em {
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;
+}
+
+/* Retícula de puntos tenue detrás del hero, desvanecida hacia los bordes. */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.09) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 60% 45%,
+    #000 20%,
+    transparent
+  );
+}
+
+/* Indicador de disponibilidad: halo que respira lento. */
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: inherit;
+  animation: status-pulse 2.4s ease-out infinite;
+}
+
+@keyframes status-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
 }
 
 /* El contenido permanece visible antes de hidratar y sin JavaScript. */
@@ -84,14 +134,14 @@ body::before {
 }
 
 .reveal.is-visible {
-  animation: reveal-in 600ms var(--ease-editorial) both;
+  animation: reveal-in 700ms var(--ease-editorial) both;
   animation-delay: calc(var(--index, 0) * 80ms);
 }
 
 @keyframes reveal-in {
   from {
-    opacity: 0.85;
-    transform: translateY(12px);
+    opacity: 0.6;
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -99,29 +149,39 @@ body::before {
   }
 }
 
-/* Hover de tarjetas: desplazamiento de sombra ultra sutil. */
+/* Hover de tarjetas: borde más claro y un brillo cálido muy sutil. */
 .card-lift {
   transition:
-    border-color 200ms ease,
-    box-shadow 200ms ease,
-    transform 200ms ease;
+    border-color 250ms ease,
+    background-color 250ms ease,
+    box-shadow 250ms ease;
 }
 
 .card-lift:hover {
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    0 2px 16px rgba(255, 255, 255, 0.04);
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 24px 60px -30px rgba(231, 220, 195, 0.18);
+}
+
+.modal-backdrop {
+  animation: backdrop-in 200ms ease-out;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
 }
 
 .modal-panel {
-  animation: modal-in 240ms var(--ease-editorial);
+  animation: modal-in 320ms var(--ease-editorial);
 }
 
 @keyframes modal-in {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.99);
+    transform: translateY(16px) scale(0.985);
   }
   to {
     opacity: 1;
@@ -129,22 +189,32 @@ body::before {
   }
 }
 
+.menu-panel {
+  animation: menu-in 220ms var(--ease-editorial);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-foreground);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  body::before {
-    animation: none;
-  }
-  .reveal.is-visible {
-    animation: none;
-  }
-  .modal-panel {
+  body::before,
+  .status-dot::after,
+  .reveal.is-visible,
+  .modal-backdrop,
+  .modal-panel,
+  .menu-panel {
     animation: none;
   }
   .card-lift {

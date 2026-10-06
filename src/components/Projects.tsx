@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectModal from "@/components/ProjectModal";
 import { projects, type Project } from "@/content/projects";
-import { dictionaries } from "@/content/ui";
+import { dictionaries, sectionIndex } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
 
 export default function Projects({
@@ -32,31 +32,30 @@ export default function Projects({
     <section
       id={t.sections.projects}
       aria-labelledby="projects-title"
-      className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:py-24"
+      className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8 sm:py-24 md:px-6"
     >
       <Reveal>
         <SectionHeading
+          index={sectionIndex.projects}
           eyebrow={t.projects.eyebrow}
           title={t.projects.title}
           id="projects-title"
         />
       </Reveal>
-      <div className="mt-10">
+      <div className="mt-14">
         <Reveal>
-          <h3
-            id="destacados-title"
-            className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase"
-          >
+          <h3 className="font-meta flex items-center gap-3 text-[0.6875rem] tracking-[0.18em] text-neutral-400 uppercase">
             {t.projects.featured}
             <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
           </h3>
         </Reveal>
         <ul className="mt-6 grid gap-6">
-          {featured.map((project) => (
+          {featured.map((project, i) => (
             <li key={project.slug}>
               <Reveal>
                 <ProjectCard
                   project={project}
+                  index={i}
                   locale={locale}
                   spotlight
                   onOpen={() => handleOpen(project)}
@@ -67,9 +66,9 @@ export default function Projects({
         </ul>
       </div>
       {secondary.length > 0 && (
-        <div className="mt-12">
+        <div className="mt-16">
           <Reveal>
-            <h3 className="font-meta text-accent flex items-baseline gap-3 text-xs tracking-[0.18em] uppercase">
+            <h3 className="font-meta flex items-center gap-3 text-[0.6875rem] tracking-[0.18em] text-neutral-400 uppercase">
               {t.projects.secondary}
               <span aria-hidden="true" className="h-px flex-1 bg-white/10" />
             </h3>
@@ -80,6 +79,7 @@ export default function Projects({
                 <Reveal index={i}>
                   <ProjectCard
                     project={project}
+                    index={featured.length + i}
                     locale={locale}
                     onOpen={() => handleOpen(project)}
                   />

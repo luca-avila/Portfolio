@@ -8,11 +8,11 @@ export default function StackPills({
   label: string;
 }): React.JSX.Element {
   return (
-    <ul aria-label={label} className="flex flex-wrap gap-2">
+    <ul aria-label={label} className="flex flex-wrap gap-1.5">
       {items.map((item) => (
         <li
           key={item}
-          className="font-meta rounded-full border border-white/15 bg-white/[0.05] px-3 py-1 text-xs tracking-[0.05em] text-neutral-300 uppercase"
+          className="font-meta rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.6875rem] tracking-[0.06em] text-neutral-300 uppercase"
         >
           {item}
         </li>
