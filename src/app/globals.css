@@ -8,11 +8,23 @@
     "Segoe UI", sans-serif;
 }
 
-:root {
-  color-scheme: dark;
+/* Colores semánticos del tema. Al estar en `@theme`, Tailwind genera
+   `bg-background`, `bg-surface`, `text-accent`, etc. con todas sus
+   variantes; los valores se reasignan abajo para el modo claro. */
+@theme {
   --color-background: #0a0a0a;
+  --color-surface: #0d0d0d;
+  --color-surface-raised: #0e0e0e;
   --color-foreground: #f5f5f5;
   --color-accent: #e7dcc3;
+  --color-scrim: rgb(0 0 0 / 0.75);
+  --color-shadow: rgb(0 0 0 / 0.9);
+}
+
+/* Modo oscuro por defecto (también sin JavaScript). */
+:root {
+  color-scheme: dark;
+  --ambient-glow: rgba(247, 246, 243, 0.055);
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --font-editorial:
     var(--font-editorial-family), Georgia, "Times New Roman", serif;
@@ -20,6 +32,39 @@
     var(--font-meta-family), "SF Mono", ui-monospace, SFMono-Regular, Menlo,
     monospace;
 }
+
+/* Modo claro: los componentes están escritos para fondo oscuro
+   (`text-neutral-100`, `border-white/10`, ...), así que en vez de duplicar
+   cada clase con una variante se invierte la escala de grises y `white`
+   pasa a ser la tinta. El tema lo fija el script inline de `RootDocument`
+   en `<html data-theme>` antes del primer pintado. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ambient-glow: rgba(231, 220, 195, 0.35);
+  --color-background: #f7f6f3;
+  --color-surface: #fbfaf8;
+  --color-surface-raised: #ffffff;
+  --color-foreground: #171717;
+  --color-accent: #7a5c28;
+  --color-scrim: rgb(23 23 23 / 0.4);
+  --color-shadow: rgb(0 0 0 / 0.22);
+  --color-white: #000;
+  --color-neutral-50: oklch(14.5% 0 none);
+  --color-neutral-100: oklch(20.5% 0 none);
+  --color-neutral-200: oklch(26.9% 0 none);
+  --color-neutral-300: oklch(37.1% 0 none);
+  --color-neutral-400: oklch(43.9% 0 none);
+  --color-neutral-600: oklch(70.8% 0 none);
+  --color-neutral-700: oklch(87% 0 none);
+  --color-neutral-800: oklch(92.2% 0 none);
+  --color-neutral-900: oklch(97% 0 none);
+  --color-neutral-950: oklch(98.5% 0 none);
+  --color-emerald-400: oklch(59.6% 0.145 163.225);
+}
+
+/* `light:` aplica estilos solo en modo claro (p. ej. el ícono del
+   selector de tema, que así es correcto antes de hidratar). */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 html {
   background-color: var(--color-background);
@@ -41,7 +86,7 @@ body::before {
   pointer-events: none;
   background: radial-gradient(
     56rem 28rem at 50% -8rem,
-    rgba(247, 246, 243, 0.055),
+    var(--ambient-glow),
     transparent 65%
   );
   animation: ambient-drift 24s ease-in-out infinite alternate;
@@ -74,18 +119,6 @@ body::before {
   font-family: var(--font-meta);
 }
 
-/* Acento cálido único: eyebrows, números e itálicas editoriales.
-   Registrado como utility para que funcione con variantes
-   (`group-hover:`, `hover:`, ...); como clase CSS plana Tailwind
-   no generaría esas variantes. */
-@utility text-accent {
-  color: var(--color-accent);
-}
-
-@utility bg-accent {
-  background-color: var(--color-accent);
-}
-
 .font-editorial-em {
   font-family: var(--font-editorial);
   font-style: italic;
@@ -96,7 +129,7 @@ body::before {
 /* Retícula de puntos tenue detrás del hero, desvanecida hacia los bordes. */
 .bg-dot-grid {
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.09) 1px,
+    color-mix(in oklab, var(--color-white) 9%, transparent) 1px,
     transparent 1px
   );
   background-size: 24px 24px;
@@ -158,10 +191,10 @@ body::before {
 }
 
 .card-lift:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
-    0 24px 60px -30px rgba(231, 220, 195, 0.18);
+    0 1px 0 color-mix(in oklab, var(--color-white) 6%, transparent) inset,
+    0 24px 60px -30px color-mix(in oklab, var(--color-accent) 18%, transparent);
 }
 
 .modal-backdrop {

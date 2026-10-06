@@ -79,7 +79,7 @@ export default function ProjectModal({
 
   return (
     <div
-      className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 backdrop-blur-md sm:p-6"
+      className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-scrim p-3 backdrop-blur-md sm:p-6"
       onMouseDown={handleOverlayMouseDown}
     >
       <div
@@ -88,7 +88,7 @@ export default function ProjectModal({
         aria-modal="true"
         aria-labelledby="project-modal-title"
         onKeyDown={handlePanelKeyDown}
-        className="modal-panel max-h-[92svh] w-full max-w-3xl overflow-y-auto overscroll-contain rounded-3xl border border-white/10 bg-[#0e0e0e] shadow-[0_40px_120px_-40px_rgba(0,0,0,1)]"
+        className="modal-panel max-h-[92svh] w-full max-w-3xl overflow-y-auto overscroll-contain rounded-3xl border border-white/10 bg-surface-raised shadow-[0_40px_120px_-40px_var(--color-shadow)]"
       >
         <div className="flex items-start justify-between gap-4 p-5 sm:p-8 sm:pb-6">
           <div className="min-w-0">

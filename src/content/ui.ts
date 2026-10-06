@@ -17,6 +17,8 @@ export type Dictionary = {
     closeMenu: string;
     languageLabel: string;
     switchTo: string;
+    lightTheme: string;
+    darkTheme: string;
   };
   hero: {
     portraitAlt: (name: string) => string;
@@ -90,6 +92,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       closeMenu: "Cerrar menú",
       languageLabel: "Idioma",
       switchTo: "Ver en inglés",
+      lightTheme: "Activar modo claro",
+      darkTheme: "Activar modo oscuro",
     },
     hero: {
       portraitAlt: (name) => `Retrato de ${name}`,
@@ -154,6 +158,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       closeMenu: "Close menu",
       languageLabel: "Language",
       switchTo: "View in Spanish",
+      lightTheme: "Switch to light mode",
+      darkTheme: "Switch to dark mode",
     },
     hero: {
       portraitAlt: (name) => `Portrait of ${name}`,

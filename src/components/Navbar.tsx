@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CloseIcon, MenuIcon } from "@/components/Icons";
 import LanguageSwitch from "@/components/LanguageSwitch";
+import ThemeToggle from "@/components/ThemeToggle";
 import { profiles } from "@/content/profile";
 import { dictionaries, sectionIndex } from "@/content/ui";
 import type { Locale } from "@/lib/i18n";
@@ -84,8 +85,8 @@ export default function Navbar({
     <header
       className={`sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
         scrolled || open
-          ? "border-white/10 bg-[#0a0a0a]/85"
-          : "border-transparent bg-[#0a0a0a]/40"
+          ? "border-white/10 bg-background/85"
+          : "border-transparent bg-background/40"
       }`}
     >
       <nav
@@ -129,6 +130,7 @@ export default function Navbar({
             })}
           </ul>
           <LanguageSwitch locale={locale} />
+          <ThemeToggle locale={locale} />
           <button
             type="button"
             aria-expanded={open}

@@ -63,7 +63,7 @@ export default function Contact({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${contact.profileLabel(link.label, profile.name)} ${newTab}`}
-                    className="group flex min-h-14 items-center gap-4 rounded-2xl border border-white/10 bg-[#0a0a0a]/60 px-4 py-3 transition-colors hover:border-white/25 hover:bg-white/[0.04]"
+                    className="group flex min-h-14 items-center gap-4 rounded-2xl border border-white/10 bg-background/60 px-4 py-3 transition-colors hover:border-white/25 hover:bg-white/[0.04]"
                   >
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.05] text-neutral-200">
                       <SocialIcon label={link.label} className="h-4 w-4" />

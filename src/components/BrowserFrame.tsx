@@ -9,7 +9,7 @@ export default function BrowserFrame({
   const host = url === "" ? "" : new URL(url).host;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]">
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_30px_80px_-40px_var(--color-shadow)]">
       <div
         aria-hidden="true"
         className="flex items-center gap-3 border-b border-white/10 bg-white/[0.03] px-3.5 py-2.5"

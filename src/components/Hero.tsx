@@ -55,11 +55,11 @@ export default function Hero({
               {/* Funde la foto con el fondo: abajo en móvil, sutil en escritorio. */}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a] md:via-transparent md:to-black/40"
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background md:via-transparent md:to-black/40"
               />
             </div>
             <div className="-mt-10 flex min-w-0 flex-col px-5 sm:px-8 md:mt-0 md:px-0">
-              <p className="font-meta inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-[#0a0a0a]/80 py-1.5 pr-3.5 pl-3 text-[0.6875rem] tracking-[0.12em] text-neutral-300 uppercase backdrop-blur">
+              <p className="font-meta inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-background/80 py-1.5 pr-3.5 pl-3 text-[0.6875rem] tracking-[0.12em] text-neutral-300 uppercase backdrop-blur">
                 <span
                   aria-hidden="true"
                   className="status-dot relative h-1.5 w-1.5 rounded-full bg-emerald-400"
@@ -119,7 +119,7 @@ export default function Hero({
             className="mx-5 mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mx-8 sm:grid-cols-3 md:mx-0 md:mt-16"
           >
             {profile.highlights.map((item) => (
-              <div key={item.label} className="bg-[#0d0d0d] px-5 py-4">
+              <div key={item.label} className="bg-surface px-5 py-4">
                 <dt className="font-meta text-[0.6875rem] tracking-[0.14em] text-neutral-400 uppercase">
                   {item.label}
                 </dt>

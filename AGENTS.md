@@ -2,7 +2,7 @@
 
 ## Proyecto
 
-Portfolio personal one-page, estático, bilingüe (español por defecto en `/`, inglés en `/en/`), solo modo oscuro.
+Portfolio personal one-page, estático, bilingüe (español por defecto en `/`, inglés en `/en/`), modo oscuro y claro con selector.
 Fuente visual: `wireframes/` (local, no se commitea — ver `.gitignore`).
 Secciones: Hero, Projects, Project-detail (modal), About, Contact.
 
@@ -43,6 +43,7 @@ src/app/globals.css       # @import "tailwindcss";
 src/components/RootDocument.tsx  # <html>/<body> + fuentes, compartido por ambos layouts
 src/components/HomePage.tsx      # composición one-page, recibe `locale`
 src/components/LanguageSwitch.tsx
+src/components/ThemeToggle.tsx # selector claro/oscuro (client)
 src/components/Navbar.tsx
 src/components/Hero.tsx
 src/components/Projects.tsx
@@ -56,6 +57,7 @@ src/content/profile.ts    # bio, links, skills (textos por idioma)
 src/content/ui.ts         # textos de UI y anclas por idioma
 src/lib/i18n.ts           # idiomas soportados y sus rutas
 src/lib/metadata.ts       # metadata por idioma (hreflang, og)
+src/lib/theme.ts          # temas y script inline que fija `data-theme`
 public/                   # foto hero, avatares, cv.pdf, og-image
 nginx.conf
 ```
@@ -88,13 +90,15 @@ Reglas globales:
 
 - Contenido bilingüe: español (por defecto, en `/`) e inglés (en `/en/`). Todo texto visible o `aria-label` va en `src/content/` para ambos idiomas; nada hardcodeado en componentes.
 - i18n sin dependencias: cada idioma es un root layout estático; los componentes reciben `locale` y leen `dictionaries[locale]`, `profiles[locale]`, `projects[locale]`. Selector ES/EN en la navbar con links normales.
-- Solo oscuro. Base cercana a `#0a0a0a`, bordes sutiles `white/10`, radios grandes (`rounded-2xl/3xl`). No `light mode`, no `next-themes`.
+- Tema oscuro (base `#0a0a0a`) y claro (base `#f7f6f3`), bordes sutiles `white/10`, radios grandes (`rounded-2xl/3xl`). Sin `next-themes`.
+- El tema vive en `<html data-theme="dark|light">`: lo fija un script inline en `<head>` (localStorage > `prefers-color-scheme` > oscuro) y lo cambia `ThemeToggle`. Sin JS queda oscuro.
+- Los componentes se escriben pensando en oscuro (`text-neutral-*`, `white/*`); en claro `globals.css` invierte la escala `neutral` y `white`. No usar colores hex sueltos: usar los tokens `background`, `surface`, `surface-raised`, `accent`, `scrim` y `var(--color-shadow)`. Para ajustes solo en claro, variante `light:`.
 - Mobile-first responsive. Hero stackea en vertical en móvil.
 - Accesibilidad mínima: `alt` en imágenes, `aria-label` en iconos, contraste AA, foco visible, modal con `role="dialog" aria-modal="true"`.
 
 ## Estilo de código
 
-- Server Components por defecto. `"use client"` solo en `ProjectModal`, navbar móvil, o interacción real.
+- Server Components por defecto. `"use client"` solo en `ProjectModal`, navbar móvil, `ThemeToggle` o interacción real.
 - TypeScript `strict`. Nada de `any` sin justificar. Tipos de contenido en `src/content/*.ts`.
 - Alias `@/*` para imports. Nada de rutas relativas `../../../`.
 - Tailwind para todo el estilo. Nada de CSS Modules ni `style={{}}` salvo excepción justificada.
@@ -136,7 +140,7 @@ rsync -avz --delete out/ user@vps:/var/www/portfolio/
 1. Cambios pequeños por iteración: una sección por vez (Hero → Projects → Modal → About → Contact).
 2. Antes de codificar, leer `wireframes/*.png` correspondiente y `loop/.loop/task.md` si no está vacío.
 3. No tocar `loop/`, `wireframes/`, `.agents/` más allá de lectura. Ya están en `.gitignore`, no forzar `git add -f`.
-4. No agregar dependencias sin justificar: `framer-motion`, CMS, i18n, `next-themes` están prohibidos en v1 salvo orden explícita.
+4. No agregar dependencias sin justificar: `framer-motion`, CMS, librerías de i18n o de temas (`next-themes`) están prohibidos en v1 salvo orden explícita.
 5. No agregar API Routes, Server Actions, ni `fetch`/POST. Contact es solo links.
 6. Commits en español, formato: `[sección] descripción breve`.
 

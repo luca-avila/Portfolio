@@ -1,5 +1,6 @@
 import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import type { Locale } from "@/lib/i18n";
+import { themeInitScript } from "@/lib/theme";
 import "@/app/globals.css";
 
 const sans = Geist({
@@ -25,6 +26,8 @@ const meta = JetBrains_Mono({
 
 // `<html>` compartido por los root layouts de cada idioma. Las variables de
 // fuente van en <html> para que `globals.css` las resuelva desde la raíz.
+// `data-theme` lo agrega el script inline antes de hidratar, de ahí
+// `suppressHydrationWarning`.
 export default function RootDocument({
   locale,
   children,
@@ -36,8 +39,10 @@ export default function RootDocument({
     <html
       lang={locale}
       className={`${sans.variable} ${editorial.variable} ${meta.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-[#0a0a0a] font-sans text-neutral-100 antialiased">
+      <body className="min-h-screen bg-background font-sans text-neutral-100 antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {children}
       </body>
     </html>
